@@ -1,0 +1,69 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  // output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+
+
+model Student{
+  id Int @default(autoincrement()) @id @unique
+  email String @unique
+  password String
+  resumeurl String
+  resume  Resume ?
+  
+}
+
+
+
+
+
+model Employer{
+  id Int @default(autoincrement()) @id
+  companyName String
+  email String @unique
+  password String
+  intership Internship[]
+
+}
+
+
+
+model Resume{
+
+  id          Int @default(autoincrement()) @id @unique
+  skill       String[]
+  location    String
+  title       String
+  education   String
+  ews         Boolean
+  studentid   Int @unique
+
+  student    Student @relation(fields: [studentid],references: [id])
+
+}
+
+
+
+
+
+model Internship {
+  id          Int       @id @default(autoincrement())
+  title       String
+  description String
+  skill       String[]
+  location    String
+  employerId  Int       // 👈 foreign key
+  employer    Employer  @relation(fields: [employerId], references: [id])
+}
