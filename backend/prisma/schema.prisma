@@ -18,9 +18,10 @@ datasource db {
 
 model Student{
   id Int @default(autoincrement()) @id @unique
+  name String
   email String @unique
   password String
-  resumeurl String
+  resumeurl String?
   resume  Resume ?
   
 }
@@ -34,7 +35,7 @@ model Employer{
   companyName String
   email String @unique
   password String
-  intership Internship[]
+  intership  Internship[]
 
 }
 
