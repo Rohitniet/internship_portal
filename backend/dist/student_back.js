@@ -65,5 +65,7 @@ studentrouter.post("/signin", async (req, res) => {
     });
 });
 studentrouter.post("/resume", jwtmiddleware, upload.single("resume"), async (req, res) => {
+    // backend hit of pythin json format information resume and embeding 
+    // db call 
 });
 //# sourceMappingURL=student_back.js.map
